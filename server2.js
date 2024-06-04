@@ -204,9 +204,10 @@ app.post("/logout", (req, res) => {
         req.session.destroy((err) => {
             if (err) {
                 res.send("Logout error")
-            } else {
-                res.send("Logout successful")
-            }
+                return
+            } 
+            res.send("Logout successful")
+            
         })
     }
     else {
