@@ -2,13 +2,13 @@
   "name": "project1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/routes/tsServer.js",
   "scripts": {
     "build": "rimraf dist && npx tsc",
     "prestart": "npm run build",
-    "start": "node dist/tsServer.js",
+    "start": "node dist/src/routes/tsServer.js",
     "preserve": "npm run build",
-    "serve": "npx tsc -w & nodemon dist/tsServer.js"
+    "serve": "npx tsc -w & nodemon dist/src/routes/tsServer.js"
   },
   "keywords": [],
   "author": "",

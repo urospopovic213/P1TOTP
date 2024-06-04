@@ -9,7 +9,7 @@ export const db = knex(config)
 
 export const quickUpdate = async (query_field: string, query_value: any, 
                             field: string, value: any) => {
-                                
+
     await db("user").where({
         [query_field]: query_value 
     }).update({

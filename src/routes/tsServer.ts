@@ -8,13 +8,13 @@ import exp from "constants"
 import { execPath } from "process"
 import { userInfo } from "os"
 
-import { UserDatabaseInterface, UserInterface } from "./UserInterface"
-import { verifyToken } from "./tsVerify"
-import { loginTimeMiddleware, checkSession, logoutMiddleware } from "./tsMiddlewares"
+import { UserDatabaseInterface, UserInterface } from "../interfaces/UserInterface"
+import { verifyToken } from "../helpers/tsVerify"
+import { loginTimeMiddleware, checkSession, logoutMiddleware } from "../middlewares/tsMiddlewares"
 
 
-import config from "./tsKnex"
-import { db, quickUpdate } from "./databaseActions"
+import config from "../db/tsKnex"
+import { db, quickUpdate } from "../db/databaseActions"
 
 import { error } from "console"
 
@@ -45,22 +45,10 @@ app.use(session({
 // ROUTES
 
 
-app.get("/", async (req, res) => {
-    let user = await db("user").where({
-        username: "lazar"
-    }).first("*")
-    console.log(user)
-    if (user){
-        console.log("proso")
-    }
-    res.send(user)
-    
-})
-
 
 app.route("/register")
     .get(checkSession, (req, res) => {
-        res.sendFile(path.join(__dirname, "..", "public", "register.html"))
+        res.sendFile(path.join(__dirname, "../..", "public", "register.html"))
     })
     .post(checkSession, async (req, res) => {
         try {
@@ -166,7 +154,7 @@ app.post("/verify", async (req, res) => {
 
 
 app.get("/login", loginTimeMiddleware, checkSession, (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "public", "login.html"))
+    res.sendFile(path.join(__dirname, "../..", "public", "login.html"))
 })
 app.post("/login", loginTimeMiddleware, checkSession, async (req, res) => {
 
