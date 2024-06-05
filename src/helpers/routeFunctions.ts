@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express"
+import { Request, Response } from "express"
 
 
 import bcrypt from "bcrypt"
@@ -39,10 +39,10 @@ export const registerPostFunction = async (req: Request, res: Response) => {
         
         const hashedPassword = await bcrypt.hash(header_pass as string, 10)
         
-        let big_secret = speakeasy.generateSecret()
+        const big_secret = speakeasy.generateSecret()
 
         try {
-            let duplicate = await db("user").where({
+            const duplicate = await db("user").where({
                 username: header_username
             }).select("*")
 
@@ -97,7 +97,7 @@ export const verifyPostFunction = async (req: Request, res: Response) => {
     console.log(req.headers)
 
     try {
-        let usr = await db("user").where({
+        const usr = await db("user").where({
             username: username
         }).select("*")
 
@@ -110,7 +110,7 @@ export const verifyPostFunction = async (req: Request, res: Response) => {
         }
     
         const user_id: number = usr[0].id
-        let user_secret = JSON.parse(usr[0].secret)
+        const user_secret = JSON.parse(usr[0].secret)
     
         const is_verified: boolean = verifyToken(user_secret.base32, token as string)
         if (is_verified) {
@@ -140,7 +140,7 @@ export const loginPostFunction = async (req: Request, res: Response) => {
 
 
     try {
-        let user = await db("user").where({
+        const user = await db("user").where({
             username: req.headers.username as string
         }).select("*")
     
@@ -150,7 +150,7 @@ export const loginPostFunction = async (req: Request, res: Response) => {
             return
         }
         else if (user[0]["login_attempts"] >= 3) {
-            let current_time = Date.now()
+            const current_time = Date.now()
             if (current_time >= user[0]["banned_until"]) {
                 user[0].login_attempts = 0
                 await quickUpdate("id", user[0].id, "login_attempts", 0)
@@ -181,12 +181,12 @@ export const loginPostFunction = async (req: Request, res: Response) => {
                     res.send("User logged in")
                 }
                 else {
-                    let current_login_attempts = user[0]["login_attempts"]
+                    const current_login_attempts = user[0]["login_attempts"]
                     user[0].login_attempts += 1
                     await quickUpdate("id", user[0].id, "login_attempts", (current_login_attempts+1))
     
                     if (user[0]["login_attempts"] >= 3) {
-                        let banned_until_local = Date.now() + 1 * 60 * 1000
+                        const banned_until_local = Date.now() + 1 * 60 * 1000
                         user[0]["banned_until"] = banned_until_local
                         await quickUpdate("id", user[0].id, "banned_until", banned_until_local)
                     }

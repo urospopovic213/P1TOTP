@@ -1,6 +1,5 @@
 import knex from "knex"
 import config from "./tsKnex"
-import { error } from "console"
 
 
 export const db = knex(config)

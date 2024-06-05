@@ -8,7 +8,8 @@
     "prestart": "npm run build",
     "start": "node dist/src/routes/tsServer.js",
     "preserve": "npm run build",
-    "serve": "npx tsc -w & nodemon dist/src/routes/tsServer.js"
+    "serve": "npx tsc -w & nodemon dist/src/routes/tsServer.js",
+    "lint": "npx eslint src/"
   },
   "keywords": [],
   "author": "",
@@ -27,14 +28,22 @@
     "qrcode": "^1.5.3",
     "rimraf": "^5.0.7",
     "speakeasy": "^2.0.0",
-    "typescript": "^5.4.5"
+    "swagger-ui-express": "^5.0.1",
+    "typescript": "^5.4.5",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
     "@types/bcrypt": "^5.0.2",
     "@types/express-session": "^1.18.0",
     "@types/knex": "^0.16.1",
     "@types/qrcode": "^1.5.5",
     "@types/speakeasy": "^2.0.10",
-    "nodemon": "^3.1.2"
+    "@types/swagger-ui-express": "^4.1.6",
+    "@types/yamljs": "^0.2.34",
+    "eslint": "^9.4.0",
+    "globals": "^15.3.0",
+    "nodemon": "^3.1.2",
+    "typescript-eslint": "^7.12.0"
   }
 }

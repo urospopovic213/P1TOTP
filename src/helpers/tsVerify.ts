@@ -1,5 +1,4 @@
 import speakeasy from "speakeasy"
-import crypto from "crypto"
 
 
 export const verifyToken = (userSecret:string, token:string): boolean => {

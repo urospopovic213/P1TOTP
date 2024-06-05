@@ -5,8 +5,12 @@ import session from "express-session"
 
 import { loginTimeMiddleware, checkSession, logoutMiddleware } from "../middlewares/tsMiddlewares"
 
-
 import { loginPostFunction, logoutPostFunction, registerPostFunction, verifyPostFunction } from "../helpers/routeFunctions"
+
+import swaggerUi from "swagger-ui-express"
+import YAML from "yamljs"
+const swaggerDocument = YAML.load(path.join(__dirname, "../../swagger.yaml"))
+
 
 
 const app = express()
@@ -17,6 +21,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 
 // ROUTES
