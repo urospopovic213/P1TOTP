@@ -1,22 +1,11 @@
 import express from "express"
-// import speakeasy from "speakeasy"
-// import QRCode from "qrcode"
+
 import path from "path"
 import session from "express-session"
-// import bcrypt from "bcrypt"
-// import exp from "constants"
-// import { execPath } from "process"
-// import { userInfo } from "os"
 
-// import { UserDatabaseInterface, UserInterface } from "../interfaces/UserInterface"
-// import { verifyToken } from "../helpers/tsVerify"
 import { loginTimeMiddleware, checkSession, logoutMiddleware } from "../middlewares/tsMiddlewares"
 
 
-// import config from "../db/tsKnex"
-// import { db, quickUpdate } from "../db/databaseActions"
-
-// import { error } from "console"
 import { loginPostFunction, logoutPostFunction, registerPostFunction, verifyPostFunction } from "../helpers/routeFunctions"
 
 
